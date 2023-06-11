@@ -14,7 +14,9 @@ jobs:
       - run: npm t
       - run: npm run typecheck-test
       - run: cd examples/my-app && npm run typecheck
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - run: npm run type-coverage
       - name: persist to workspace
         uses: actions/upload-artifact@v3
