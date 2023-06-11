@@ -105,7 +105,7 @@ export const createRailway = ({
       Object.fromEntries(
         Object.entries(update).map(([tag, up]) => [
           tag,
-          (...args: readonly never[]) => {
+          (...args: readonly never[]): undefined => {
             if (isRunning.current) {
               const effs = effects.current
 
@@ -128,8 +128,6 @@ export const createRailway = ({
                 dispatch(actions, effs.shift()?.(actionCreators, deps.current))
               }
             }
-
-            return undefined
           }
         ])
       )
