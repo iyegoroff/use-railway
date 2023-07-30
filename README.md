@@ -9,7 +9,7 @@
 [![bundlejs](https://deno.bundlejs.com/?q=use-railway@0.0.8,use-railway@0.0.8&treeshake=[*],[{+default+}]&config={%22esbuild%22:{%22external%22:[%22ts-railway%22]}}&badge=)](https://bundlejs.com/?q=use-railway)
 [![npm](https://img.shields.io/npm/l/use-railway.svg?t=1495378566926)](https://www.npmjs.com/package/use-railway)
 
-useReducer with effects, the elmish way
+useReducer with effects
 
 ## Getting started
 

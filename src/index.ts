@@ -27,14 +27,18 @@ export const dispatch = <Action extends TupleMap>(
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+type EffectCallback = () => void | (() => void)
+
 export const createRailway = ({
   useRef,
   useEffect,
+  useLayoutEffect,
   useState
 }: {
   useRef: <T>(initial: T) => { current: T }
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-  useEffect: (effect: () => void | (() => void), deps?: readonly unknown[]) => void
+  useEffect: (effect: EffectCallback, deps?: readonly unknown[]) => void
+  useLayoutEffect: (effect: EffectCallback, deps?: readonly unknown[]) => void
   useState: <T>(initial: T | (() => T)) => [T, (value: T) => void]
 }) => {
   function useRailwayImpl<
@@ -88,7 +92,7 @@ export const createRailway = ({
     const effects = useRef(initialEffects)
     const deps = useRef(injects)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       deps.current = injects
     }, [injects])
 

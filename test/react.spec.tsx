@@ -3,7 +3,7 @@ import { render, cleanup, waitFor, fireEvent, renderHook, act } from '@testing-l
 import { AsyncResult, Result } from 'ts-railway'
 import { Command, Effect, UpdateMap, createRailway, dispatch } from '../src'
 
-const useRailway = createRailway({ useEffect, useRef, useState })
+const useRailway = createRailway({ useEffect, useRef, useState, useLayoutEffect })
 
 describe('example test', () => {
   afterEach(cleanup)
@@ -406,6 +406,53 @@ describe('useRailway', () => {
 
     await waitFor(() => {
       expect(getByTestId('result').textContent).toEqual('6')
+    })
+  })
+
+  test('should update injects prior to everything else', async () => {
+    type State = number
+    type Action = { start: [number] }
+    type Injects = { amount: number }
+
+    const init = (): Command<State, Action, Injects> => [0]
+
+    const update: UpdateMap<State, Action, Injects> = {
+      start: (_state, num) => [
+        num,
+        (_, { amount }) => {
+          if (num !== amount) {
+            throw new Error(`${num} !== ${amount}`)
+          }
+
+          return Result.success(undefined)
+        }
+      ]
+    }
+
+    const Setter = ({ amount }: { amount: number }) => {
+      const [state, { start }] = useRailway(init, update, { amount })
+
+      useLayoutEffect(() => {
+        start(amount)
+      }, [amount, start])
+
+      return <div data-testid='result'>{state}</div>
+    }
+
+    const App = () => {
+      const [state, setState] = useState(1)
+
+      useEffect(() => {
+        setTimeout(() => setState(2), 100)
+      }, [])
+
+      return <Setter amount={state} />
+    }
+
+    const { getByTestId } = render(<App />)
+
+    await waitFor(() => {
+      expect(getByTestId('result').textContent).toEqual('2')
     })
   })
 
