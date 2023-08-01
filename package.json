@@ -1,6 +1,6 @@
 {
   "name": "use-railway",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "useReducer with effects",
   "sideEffects": false,
   "types": "./dist/dts/index.d.ts",
