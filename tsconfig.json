@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "stripInternal": true,
     "sourceMap": true,
     "target": "ES2018",
@@ -7,7 +8,6 @@
     "strict": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "removeComments": true,
     "noEmitOnError": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,

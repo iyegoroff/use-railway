@@ -3,7 +3,6 @@
   "version": "0.0.10",
   "description": "useReducer with effects",
   "sideEffects": false,
-  "types": "./dist/dts/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/mjs/index.js",
   "react-native": "./dist/mjs/index.js",
@@ -18,7 +17,7 @@
   "scripts": {
     "preversion": "npm run lint -- --fix && npm run build && npm run typecheck-test && npm t && npm run type-coverage && npm run update-deps-badge && npm run update-size-badge",
     "postversion": "git add . && git commit -am \"lint & docs [skip build]\" || : && git push && git push --tags",
-    "build:ts": "tsc -p configs/tsconfig.cjs.json && tsc -p configs/tsconfig.mjs.json && tsc -p configs/tsconfig.dts.json",
+    "build:ts": "tsc -p configs/tsconfig.cjs.json && tsc -p configs/tsconfig.mjs.json",
     "build": "rm -rf dist && npm run build:ts && echo '{ \"type\": \"commonjs\" }' >> dist/cjs/package.json",
     "lint": "eslint .",
     "test": "jest",
@@ -79,7 +78,7 @@
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "replace-in-file": "^7.0.1",
-    "ts-railway": "^6.1.1",
+    "ts-railway": "^6.1.4",
     "type-coverage": "^2.26.0",
     "typescript": "^5.1.3",
     "use-pipe-ts": "^2.0.3"
