@@ -1,6 +1,6 @@
 {
   "name": "use-railway",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "useReducer with effects",
   "sideEffects": false,
   "main": "./dist/cjs/index.js",
