@@ -278,7 +278,7 @@ type ActionDescriptor<Action extends TupleMap> = {
   [Key in keyof Action]: readonly [action: Key, ...params: Action[Key]]
 }[keyof Action]
 
-type EffectResult<Action extends TupleMap> = SomeResult<
+export type EffectResult<Action extends TupleMap> = SomeResult<
   ActionDescriptor<Action> | UndefinedVoid,
   ActionDescriptor<Action>
 >
